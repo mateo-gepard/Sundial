@@ -1,0 +1,1033 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="light-content">
+    <title>Armreif Zeit</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+/* ═══════════════════════════════════════════════════════
+   NEUMORPHIC SUNDIAL BRACELET CONVERTER
+   Premium Soft UI Design System
+   ═══════════════════════════════════════════════════════ */
+
+:root {
+    --surface: #e8ecf1;
+    --surface-darker: #d1d9e6;
+    --text-primary: #2d3748;
+    --text-secondary: #718096;
+    --text-muted: #a0aec0;
+    --accent: #4a5568;
+    --pink: #ec4899;
+    --pink-light: #f9a8d4;
+    --pink-dark: #be185d;
+    
+    /* Neumorphic shadows - subtle and premium */
+    --shadow-raised: 
+        8px 8px 16px rgba(163, 177, 198, 0.6),
+        -6px -6px 12px rgba(255, 255, 255, 0.9);
+    --shadow-raised-hover:
+        12px 12px 24px rgba(163, 177, 198, 0.7),
+        -8px -8px 16px rgba(255, 255, 255, 0.95);
+    --shadow-pressed:
+        inset 4px 4px 8px rgba(163, 177, 198, 0.5),
+        inset -4px -4px 8px rgba(255, 255, 255, 0.7);
+    --shadow-soft:
+        4px 4px 8px rgba(163, 177, 198, 0.4),
+        -3px -3px 6px rgba(255, 255, 255, 0.8);
+    
+    --transition: all 0.2s ease-in-out;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    background: var(--surface);
+    color: var(--text-primary);
+    min-height: 100vh;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    overflow-x: hidden;
+}
+
+#root {
+    min-height: 100vh;
+}
+
+/* ═══════════════════════════════════════════════════════
+   GREETING SCREEN
+   ═══════════════════════════════════════════════════════ */
+
+.greeting-screen {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+    background: var(--surface);
+}
+
+.greeting-hero {
+    background: var(--surface);
+    border-radius: 3rem;
+    padding: 3rem 2rem;
+    box-shadow: var(--shadow-raised);
+    text-align: center;
+    max-width: 28rem;
+    width: 100%;
+}
+
+.greeting-title {
+    font-size: 2.5rem;
+    font-weight: 300;
+    letter-spacing: -0.02em;
+    color: var(--text-primary);
+    margin-bottom: 0.5rem;
+}
+
+.greeting-date {
+    font-size: 1rem;
+    font-weight: 400;
+    color: var(--text-secondary);
+    margin-bottom: 2.5rem;
+}
+
+.greeting-cta {
+    background: var(--surface);
+    border: none;
+    border-radius: 1.5rem;
+    padding: 1.25rem 3rem;
+    font-size: 1.125rem;
+    font-weight: 500;
+    color: var(--text-primary);
+    box-shadow: var(--shadow-raised);
+    cursor: pointer;
+    transition: var(--transition);
+    font-family: inherit;
+    margin-bottom: 2rem;
+}
+
+.greeting-cta:hover {
+    box-shadow: var(--shadow-raised-hover), 0 0 20px rgba(236, 72, 153, 0.3);
+    transform: translateY(-1px);
+}
+
+.greeting-cta:active {
+    box-shadow: var(--shadow-pressed);
+    transform: translateY(0);
+}
+
+.greeting-hint {
+    font-size: 0.875rem;
+    color: var(--text-muted);
+    font-weight: 400;
+    max-width: 20rem;
+    line-height: 1.6;
+}
+
+/* ═══════════════════════════════════════════════════════
+   MAIN CONVERTER SCREEN
+   ═══════════════════════════════════════════════════════ */
+
+.converter-screen {
+    min-height: 100vh;
+    padding: 2rem 1rem 4rem;
+    background: var(--surface);
+}
+
+.converter-container {
+    max-width: 42rem;
+    margin: 0 auto;
+}
+
+.converter-header {
+    text-align: center;
+    margin-bottom: 2.5rem;
+}
+
+.converter-title {
+    font-size: 1.75rem;
+    font-weight: 300;
+    letter-spacing: -0.01em;
+    color: var(--text-primary);
+    margin-bottom: 0.5rem;
+}
+
+.back-button {
+    background: var(--surface);
+    border: none;
+    border-radius: 1rem;
+    padding: 0.75rem 1.5rem;
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: var(--text-secondary);
+    box-shadow: var(--shadow-soft);
+    cursor: pointer;
+    transition: var(--transition);
+    font-family: inherit;
+    margin-top: 1rem;
+}
+
+.back-button:hover {
+    box-shadow: var(--shadow-raised);
+    color: var(--text-primary);
+}
+
+.back-button:active {
+    box-shadow: var(--shadow-pressed);
+}
+
+/* ═══════════════════════════════════════════════════════
+   BRACELET SLIDER SECTION
+   ═══════════════════════════════════════════════════════ */
+
+.bracelet-section {
+    background: var(--surface);
+    border-radius: 2rem;
+    padding: 2rem 1.5rem;
+    box-shadow: var(--shadow-raised);
+    margin-bottom: 2rem;
+}
+
+.section-label {
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--text-muted);
+    margin-bottom: 1.5rem;
+    text-align: center;
+    position: relative;
+}
+
+.section-label::before {
+    content: '';
+    position: absolute;
+    bottom: -0.5rem;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 2rem;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, var(--pink-light), transparent);
+}
+
+.bracelet-container {
+    position: relative;
+    width: 100%;
+    margin-bottom: 1rem;
+    touch-action: none;
+    cursor: pointer;
+}
+
+.bracelet-image {
+    width: 100%;
+    height: auto;
+    display: block;
+    border-radius: 1rem;
+    user-select: none;
+    -webkit-user-drag: none;
+    pointer-events: none;
+}
+
+.bracelet-slider-track {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    right: 0;
+    height: 60px;
+    transform: translateY(-50%);
+    pointer-events: none;
+}
+
+.bracelet-knob {
+    position: absolute;
+    top: 50%;
+    width: 3.5rem;
+    height: 3.5rem;
+    background: var(--surface);
+    border-radius: 50%;
+    box-shadow: var(--shadow-raised);
+    transform: translate(-50%, -50%);
+    cursor: grab;
+    transition: box-shadow 0.15s ease-in-out;
+    touch-action: none;
+    pointer-events: all;
+    z-index: 10;
+}
+
+.bracelet-knob:active {
+    cursor: grabbing;
+    box-shadow: var(--shadow-raised-hover), 0 0 16px rgba(236, 72, 153, 0.4);
+}
+
+.bracelet-knob-inner {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0.5rem;
+    height: 0.5rem;
+    background: var(--pink);
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    box-shadow: var(--shadow-pressed);
+}
+
+.bracelet-hint {
+    text-align: center;
+    font-size: 0.875rem;
+    color: var(--text-muted);
+    margin-top: 1rem;
+    font-style: italic;
+}
+
+/* ═══════════════════════════════════════════════════════
+   DATE SELECTION SECTION
+   ═══════════════════════════════════════════════════════ */
+
+.date-section {
+    background: var(--surface);
+    border-radius: 2rem;
+    padding: 2rem 1.5rem;
+    box-shadow: var(--shadow-raised);
+    margin-bottom: 2rem;
+}
+
+.date-picker-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+}
+
+.date-input {
+    background: var(--surface);
+    border: none;
+    border-radius: 1rem;
+    padding: 1rem 1.5rem;
+    font-size: 1rem;
+    font-weight: 500;
+    color: var(--text-primary);
+    box-shadow: var(--shadow-pressed);
+    font-family: inherit;
+    text-align: center;
+    width: 100%;
+    max-width: 16rem;
+}
+
+.date-input:focus {
+    outline: none;
+    box-shadow: var(--shadow-pressed);
+}
+
+/* ═══════════════════════════════════════════════════════
+   RESULT OUTPUT SECTION
+   ═══════════════════════════════════════════════════════ */
+
+.result-section {
+    background: var(--surface);
+    border-radius: 2rem;
+    padding: 2rem 1.5rem;
+    box-shadow: var(--shadow-raised);
+    min-height: 12rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.result-empty {
+    color: var(--text-muted);
+    font-size: 0.875rem;
+    font-style: italic;
+    text-align: center;
+}
+
+.result-content {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.result-row {
+    text-align: center;
+}
+
+.result-label {
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--text-muted);
+    margin-bottom: 0.5rem;
+}
+
+.result-value {
+    font-size: 2rem;
+    font-weight: 300;
+    letter-spacing: -0.02em;
+    color: var(--text-primary);
+    font-variant-numeric: tabular-nums;
+}
+
+.result-correction {
+    font-size: 1.25rem;
+    font-weight: 400;
+    color: var(--text-secondary);
+    font-variant-numeric: tabular-nums;
+}
+
+.result-correction.positive {
+    color: var(--pink);
+}
+
+.result-correction.negative {
+    color: var(--pink-dark);
+}
+
+.divider {
+    height: 1px;
+    background: linear-gradient(
+        90deg,
+        transparent,
+        var(--surface-darker) 50%,
+        transparent
+    );
+    margin: 0.5rem 0;
+}
+
+/* ═══════════════════════════════════════════════════════
+   INFO PANEL (COLLAPSIBLE)
+   ═══════════════════════════════════════════════════════ */
+
+.info-panel {
+    background: var(--surface);
+    border-radius: 1.5rem;
+    padding: 1.5rem;
+    box-shadow: var(--shadow-soft);
+    margin-top: 2rem;
+}
+
+.info-toggle {
+    background: none;
+    border: none;
+    padding: 0;
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: var(--text-secondary);
+    cursor: pointer;
+    font-family: inherit;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    width: 100%;
+    justify-content: center;
+    transition: var(--transition);
+}
+
+.info-toggle:hover {
+    color: var(--text-primary);
+}
+
+.info-content {
+    margin-top: 1rem;
+    font-size: 0.875rem;
+    line-height: 1.6;
+    color: var(--text-secondary);
+}
+
+.info-detail {
+    margin-top: 0.75rem;
+    padding-top: 0.75rem;
+    border-top: 1px solid rgba(163, 177, 198, 0.2);
+    font-size: 0.75rem;
+    color: var(--text-muted);
+}
+
+/* ═══════════════════════════════════════════════════════
+   RESPONSIVE ADJUSTMENTS
+   ═══════════════════════════════════════════════════════ */
+
+@media (min-width: 640px) {
+    .greeting-title {
+        font-size: 3rem;
+    }
+    
+    .converter-title {
+        font-size: 2rem;
+    }
+    
+    .result-value {
+        font-size: 2.5rem;
+    }
+}
+
+@media (min-width: 768px) {
+    .converter-screen {
+        padding: 3rem 2rem 5rem;
+    }
+    
+    .bracelet-section,
+    .date-section,
+    .result-section {
+        padding: 2.5rem 2rem;
+    }
+}
+
+/* ═══════════════════════════════════════════════════════
+   UTILITY CLASSES
+   ═══════════════════════════════════════════════════════ */
+
+.fade-in {
+    animation: fadeIn 0.3s ease-in-out;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+    </style>
+</head>
+<body>
+    <div id="root"></div>
+    
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    
+    <script type="text/babel">
+// ═══════════════════════════════════════════════════════════════
+// ARMREIF SUNDIAL CONVERTER
+// Premium neumorphic web app for Theresa
+// ═══════════════════════════════════════════════════════════════
+
+const { useState, useEffect, useRef } = React;
+
+// ═══════════════════════════════════════════════════════════════
+// CONFIGURATION
+// ═══════════════════════════════════════════════════════════════
+
+const CONFIG = {
+    // Location (adjust for Theresa's location)
+    latitude: 48.1351,        // Munich, Germany (example)
+    longitude: 11.5820,
+    timezoneOffset: 1,        // CET = UTC+1
+    
+    // Reference date (bracelet calibration date)
+    referenceDate: new Date('2025-06-21'), // Summer solstice
+    
+    // Bracelet image coordinates (natural image size)
+    imageNaturalWidth: 2880,  // Adjust to actual Armreif.png size
+    imageNaturalHeight: 1200,
+    
+    // Engraved number coordinates in image space
+    braceletCoords: {
+        15: { x: 841, y: 600 },
+        16: { x: 642, y: 600 },
+        17: { x: 448, y: 600 },
+        21: { x: 2574, y: 600 },
+        22: { x: 2352, y: 600 },
+    }
+};
+
+// ═══════════════════════════════════════════════════════════════
+// ASTRONOMICAL CALCULATIONS
+// ═══════════════════════════════════════════════════════════════
+
+class SundialCalculator {
+    constructor(config) {
+        this.lat = config.latitude;
+        this.lon = config.longitude;
+        this.tzOffset = config.timezoneOffset;
+        this.refDate = config.referenceDate;
+    }
+    
+    // Day of year (1-366)
+    getDayOfYear(date) {
+        const start = new Date(date.getFullYear(), 0, 0);
+        const diff = date - start;
+        const oneDay = 1000 * 60 * 60 * 24;
+        return Math.floor(diff / oneDay);
+    }
+    
+    // Equation of Time in minutes
+    equationOfTime(date) {
+        const n = this.getDayOfYear(date);
+        const B = (360 / 365.25) * (n - 81) * Math.PI / 180;
+        const EoT = 9.87 * Math.sin(2 * B) - 7.53 * Math.cos(B) - 1.5 * Math.sin(B);
+        return EoT;
+    }
+    
+    // Solar declination in degrees
+    declination(date) {
+        const n = this.getDayOfYear(date);
+        const delta = 23.45 * Math.sin((360 / 365.25) * (n - 81) * Math.PI / 180);
+        return delta;
+    }
+    
+    // Convert time string "HH:MM" to decimal hours
+    timeToDecimal(timeStr) {
+        const [hours, minutes] = timeStr.split(':').map(Number);
+        return hours + minutes / 60;
+    }
+    
+    // Convert decimal hours to "HH:MM" format
+    decimalToTime(decimal) {
+        const hours = Math.floor(decimal);
+        const minutes = Math.round((decimal - hours) * 60);
+        const h = hours % 24;
+        const m = minutes % 60;
+        return `${String(h).padStart(2, '0')}:${String(m).padStart(2, '0')}`;
+    }
+    
+    // Convert bracelet reading to true clock time for selected date
+    convertBraceletTime(readTime, selectedDate) {
+        try {
+            const T_read = this.timeToDecimal(readTime);
+            
+            // Step 1: Convert to solar time on reference date
+            const lambda_std = 15 * this.tzOffset;
+            const EoT_d0 = this.equationOfTime(this.refDate);
+            const T_solar_d0 = T_read + (4 * (this.lon - lambda_std) + EoT_d0) / 60;
+            
+            // Step 2: Compute hour angle on reference date
+            const H0 = 15 * (T_solar_d0 - 12);
+            
+            // Step 3: Compute sun altitude on reference date
+            const lat_rad = this.lat * Math.PI / 180;
+            const delta_d0 = this.declination(this.refDate) * Math.PI / 180;
+            const H0_rad = H0 * Math.PI / 180;
+            
+            const sin_h = Math.sin(lat_rad) * Math.sin(delta_d0) + 
+                         Math.cos(lat_rad) * Math.cos(delta_d0) * Math.cos(H0_rad);
+            const h_star = Math.asin(sin_h); // in radians
+            
+            // Step 4: For selected date, solve for hour angle with same altitude
+            const delta_d = this.declination(selectedDate) * Math.PI / 180;
+            
+            const cos_H = (Math.sin(h_star) - Math.sin(lat_rad) * Math.sin(delta_d)) / 
+                         (Math.cos(lat_rad) * Math.cos(delta_d));
+            
+            // Check domain validity
+            if (cos_H < -1 || cos_H > 1) {
+                return null; // No valid result
+            }
+            
+            let H = Math.acos(cos_H) * 180 / Math.PI;
+            
+            // Choose sign based on AM/PM (before or after solar noon)
+            if (T_read < 12) {
+                H = -H; // Morning
+            }
+            
+            // Step 5: Convert back to solar time on selected date
+            const T_solar_d = 12 + H / 15;
+            
+            // Step 6: Convert solar to clock time
+            const EoT_d = this.equationOfTime(selectedDate);
+            const T_clock = T_solar_d - (4 * (this.lon - lambda_std) + EoT_d) / 60;
+            
+            // Step 7: Handle DST (simple check for European DST)
+            const isDST = this.isDaylightSaving(selectedDate);
+            const T_true = T_clock + (isDST ? 1 : 0);
+            
+            // Step 8: Compute correction
+            const correction = (T_true - T_read) * 60; // in minutes
+            
+            return {
+                trueTime: this.decimalToTime(T_true),
+                correction: Math.round(correction),
+                valid: true
+            };
+        } catch (error) {
+            console.error('Calculation error:', error);
+            return null;
+        }
+    }
+    
+    // Simple DST check for European rules (last Sunday of March/October)
+    isDaylightSaving(date) {
+        const year = date.getFullYear();
+        const month = date.getMonth();
+        
+        if (month < 2 || month > 9) return false; // Jan-Feb, Nov-Dec
+        if (month > 2 && month < 9) return true;  // Apr-Sep
+        
+        // March or October - check last Sunday
+        const lastSunday = new Date(year, month + 1, 0);
+        lastSunday.setDate(lastSunday.getDate() - lastSunday.getDay());
+        
+        if (month === 2) { // March - DST starts
+            return date >= lastSunday;
+        } else { // October - DST ends
+            return date < lastSunday;
+        }
+    }
+}
+
+// ═══════════════════════════════════════════════════════════════
+// BRACELET SLIDER COMPONENT
+// ═══════════════════════════════════════════════════════════════
+
+function BraceletSlider({ onTimeChange, imagePath }) {
+    const [knobPosition, setKnobPosition] = useState(50);
+    const [isDragging, setIsDragging] = useState(false);
+    const [displaySize, setDisplaySize] = useState({ width: 0, height: 0 });
+    const containerRef = useRef(null);
+    const imageRef = useRef(null);
+    
+    useEffect(() => {
+        const updateSize = () => {
+            if (imageRef.current) {
+                const rect = imageRef.current.getBoundingClientRect();
+                setDisplaySize({ width: rect.width, height: rect.height });
+            }
+        };
+        
+        updateSize();
+        window.addEventListener('resize', updateSize);
+        const img = imageRef.current;
+        if (img && img.complete) {
+            updateSize();
+        }
+        return () => window.removeEventListener('resize', updateSize);
+    }, []);
+    
+    const computeReadTime = (positionPercent) => {
+        const knobX = (positionPercent / 100) * CONFIG.imageNaturalWidth;
+        
+        const segment1 = [
+            { time: 17, x: CONFIG.braceletCoords[17].x },
+            { time: 16, x: CONFIG.braceletCoords[16].x },
+            { time: 15, x: CONFIG.braceletCoords[15].x },
+        ].sort((a, b) => a.x - b.x);
+        
+        const segment2 = [
+            { time: 22, x: CONFIG.braceletCoords[22].x },
+            { time: 21, x: CONFIG.braceletCoords[21].x },
+        ].sort((a, b) => a.x - b.x);
+        
+        const inSegment1 = knobX >= segment1[0].x && knobX <= segment1[segment1.length - 1].x;
+        const inSegment2 = knobX >= segment2[0].x && knobX <= segment2[segment2.length - 1].x;
+        
+        if (inSegment1) {
+            return interpolateTime(segment1, knobX);
+        } else if (inSegment2) {
+            return interpolateTime(segment2, knobX);
+        } else {
+            return null;
+        }
+    };
+    
+    const getGapMessage = (positionPercent) => {
+        const knobX = (positionPercent / 100) * CONFIG.imageNaturalWidth;
+        
+        const segment1 = [
+            { time: 17, x: CONFIG.braceletCoords[17].x },
+            { time: 16, x: CONFIG.braceletCoords[16].x },
+            { time: 15, x: CONFIG.braceletCoords[15].x },
+        ].sort((a, b) => a.x - b.x);
+        
+        const segment2 = [
+            { time: 22, x: CONFIG.braceletCoords[22].x },
+            { time: 21, x: CONFIG.braceletCoords[21].x },
+        ].sort((a, b) => a.x - b.x);
+        
+        const seg1End = segment1[segment1.length - 1].x;
+        const seg2Start = segment2[0].x;
+        
+        if (knobX < segment1[0].x) {
+            return `Der Regler ist links von allen Zahlen (Position ${Math.round(knobX)}). Schiebe ihn nach rechts zu den Zahlen 15-17.`;
+        } else if (knobX > segment2[segment2.length - 1].x) {
+            return `Der Regler ist rechts von allen Zahlen (Position ${Math.round(knobX)}). Schiebe ihn nach links zu den Zahlen 21-22.`;
+        } else if (knobX > seg1End && knobX < seg2Start) {
+            return `Der Regler ist in der Lücke zwischen den beiden Zahlengruppen (Position ${Math.round(knobX)}). Schiebe ihn zu einer der beiden Gruppen: 15-17 (links) oder 21-22 (rechts).`;
+        }
+        return '';
+    };
+    
+    const interpolateTime = (segment, x) => {
+        for (let i = 0; i < segment.length - 1; i++) {
+            if (x >= segment[i].x && x <= segment[i + 1].x) {
+                const t = (x - segment[i].x) / (segment[i + 1].x - segment[i].x);
+                const timeDecimal = segment[i].time + t * (segment[i + 1].time - segment[i].time);
+                const hours = Math.floor(timeDecimal);
+                const minutes = Math.round((timeDecimal - hours) * 60);
+                return `${String(hours).padStart(2, '0')}:${String(minutes).padStart(2, '0')}`;
+            }
+        }
+        return null;
+    };
+    
+    useEffect(() => {
+        const readTime = computeReadTime(knobPosition);
+        onTimeChange(readTime);
+    }, [knobPosition, onTimeChange]);
+    
+    const updatePosition = (clientX) => {
+        if (!containerRef.current) return;
+        const rect = containerRef.current.getBoundingClientRect();
+        const x = clientX - rect.left;
+        const percent = Math.max(0, Math.min(100, (x / rect.width) * 100));
+        setKnobPosition(percent);
+    };
+    
+    const handleStart = (clientX) => {
+        setIsDragging(true);
+        updatePosition(clientX);
+    };
+    
+    const handleMove = (clientX) => {
+        if (isDragging) {
+            updatePosition(clientX);
+        }
+    };
+    
+    const handleEnd = () => {
+        setIsDragging(false);
+    };
+    
+    const handleContainerClick = (e) => {
+        if (e.target === containerRef.current || e.target === imageRef.current) {
+            updatePosition(e.clientX);
+        }
+    };
+    
+    useEffect(() => {
+        const onMouseMove = (e) => handleMove(e.clientX);
+        const onTouchMove = (e) => {
+            if (isDragging) {
+                e.preventDefault();
+                handleMove(e.touches[0].clientX);
+            }
+        };
+        const onMouseUp = () => handleEnd();
+        const onTouchEnd = () => handleEnd();
+        
+        if (isDragging) {
+            document.addEventListener('mousemove', onMouseMove);
+            document.addEventListener('mouseup', onMouseUp);
+            document.addEventListener('touchmove', onTouchMove, { passive: false });
+            document.addEventListener('touchend', onTouchEnd);
+            
+            return () => {
+                document.removeEventListener('mousemove', onMouseMove);
+                document.removeEventListener('mouseup', onMouseUp);
+                document.removeEventListener('touchmove', onTouchMove);
+                document.removeEventListener('touchend', onTouchEnd);
+            };
+        }
+    }, [isDragging]);
+    
+    const readTime = computeReadTime(knobPosition);
+    const gapMessage = getGapMessage(knobPosition);
+    
+    return (
+        <div className="bracelet-section fade-in">
+            <div className="section-label">Armreif-Zeit ablesen</div>
+            <div 
+                className="bracelet-container" 
+                ref={containerRef}
+                onClick={handleContainerClick}
+            >
+                <img 
+                    ref={imageRef}
+                    src={imagePath} 
+                    alt="Armreif" 
+                    className="bracelet-image"
+                    onLoad={() => {
+                        const rect = imageRef.current.getBoundingClientRect();
+                        setDisplaySize({ width: rect.width, height: rect.height });
+                    }}
+                />
+                <div className="bracelet-slider-track">
+                    <div 
+                        className="bracelet-knob"
+                        style={{ left: `${knobPosition}%` }}
+                        onMouseDown={(e) => {
+                            e.preventDefault();
+                            handleStart(e.clientX);
+                        }}
+                        onTouchStart={(e) => {
+                            handleStart(e.touches[0].clientX);
+                        }}
+                    >
+                        <div className="bracelet-knob-inner"></div>
+                    </div>
+                </div>
+            </div>
+            {!readTime && (
+                <div className="bracelet-hint">
+                    {gapMessage || 'Bewege den Regler auf eine gravierte Zeit'}
+                </div>
+            )}
+        </div>
+    );
+}
+
+// ═══════════════════════════════════════════════════════════════
+// MAIN APP COMPONENT
+// ═══════════════════════════════════════════════════════════════
+
+function App() {
+    const [screen, setScreen] = useState('greeting'); // 'greeting' | 'converter'
+    const [selectedDate, setSelectedDate] = useState(new Date());
+    const [braceletTime, setBraceletTime] = useState(null);
+    const [result, setResult] = useState(null);
+    const [showInfo, setShowInfo] = useState(false);
+    
+    const calculator = new SundialCalculator(CONFIG);
+    
+    useEffect(() => {
+        if (braceletTime && selectedDate) {
+            const res = calculator.convertBraceletTime(braceletTime, selectedDate);
+            setResult(res);
+        } else {
+            setResult(null);
+        }
+    }, [braceletTime, selectedDate]);
+    
+    const formatDate = (date) => {
+        return new Intl.DateTimeFormat('de-DE', {
+            weekday: 'long',
+            year: 'numeric',
+            month: 'long',
+            day: 'numeric'
+        }).format(date);
+    };
+    
+    const formatDateInput = (date) => {
+        return date.toISOString().split('T')[0];
+    };
+    
+    if (screen === 'greeting') {
+        return (
+            <div className="greeting-screen">
+                <div className="greeting-hero fade-in">
+                    <h1 className="greeting-title">Hallo Theresa</h1>
+                    <p className="greeting-date">Heute ist der {formatDate(new Date())}</p>
+                    <button 
+                        className="greeting-cta"
+                        onClick={() => setScreen('converter')}
+                    >
+                        Zeit umrechnen
+                    </button>
+                    <p className="greeting-hint">
+                        Lies die Zeit am Armreif ab – ich mache den Rest.
+                    </p>
+                </div>
+            </div>
+        );
+    }
+    
+    return (
+        <div className="converter-screen">
+            <div className="converter-container">
+                <div className="converter-header">
+                    <h2 className="converter-title">Armreif-Rechner</h2>
+                    <button 
+                        className="back-button"
+                        onClick={() => setScreen('greeting')}
+                    >
+                        ← Zurück
+                    </button>
+                </div>
+                
+                <BraceletSlider 
+                    onTimeChange={setBraceletTime}
+                    imagePath="Armreif.png"
+                />
+                
+                <div className="date-section fade-in">
+                    <div className="section-label">Datum wählen</div>
+                    <div className="date-picker-wrapper">
+                        <input 
+                            type="date"
+                            className="date-input"
+                            value={formatDateInput(selectedDate)}
+                            onChange={(e) => setSelectedDate(new Date(e.target.value + 'T12:00:00'))}
+                        />
+                    </div>
+                </div>
+                
+                <div className="result-section fade-in">
+                    {!braceletTime || !result ? (
+                        <div className="result-empty">
+                            Wähle eine Zeit am Armreif
+                        </div>
+                    ) : (
+                        <div className="result-content">
+                            <div className="result-row">
+                                <div className="result-label">Armreif zeigt</div>
+                                <div className="result-value">{braceletTime}</div>
+                            </div>
+                            
+                            <div className="divider"></div>
+                            
+                            <div className="result-row">
+                                <div className="result-label">Echte Uhrzeit</div>
+                                <div className="result-value">{result.trueTime}</div>
+                            </div>
+                            
+                            <div className="divider"></div>
+                            
+                            <div className="result-row">
+                                <div className="result-label">Korrektur</div>
+                                <div className={`result-correction ${result.correction >= 0 ? 'positive' : 'negative'}`}>
+                                    {result.correction >= 0 ? '+' : ''}{result.correction} min
+                                </div>
+                            </div>
+                        </div>
+                    )}
+                </div>
+                
+                <div className="info-panel">
+                    <button 
+                        className="info-toggle"
+                        onClick={() => setShowInfo(!showInfo)}
+                    >
+                        {showInfo ? '▼' : '▶'} Info
+                    </button>
+                    {showInfo && (
+                        <div className="info-content fade-in">
+                            Der Armreif funktioniert wie eine Sonnenuhr. Er wurde an einem 
+                            Referenzdatum kalibriert. Durch die sich ändernde Sonnenbahn im 
+                            Jahresverlauf muss die angezeigte Zeit korrigiert werden.
+                            
+                            <div className="info-detail">
+                                Referenzdatum: {formatDate(CONFIG.referenceDate)}<br/>
+                                Standort: {CONFIG.latitude.toFixed(2)}°N, {CONFIG.longitude.toFixed(2)}°E
+                            </div>
+                        </div>
+                    )}
+                </div>
+            </div>
+        </div>
+    );
+}
+
+// ═══════════════════════════════════════════════════════════════
+// RENDER APP
+// ═══════════════════════════════════════════════════════════════
+
+const root = ReactDOM.createRoot(document.getElementById('root'));
+root.render(<App />);
+    </script>
+</body>
+</html>
